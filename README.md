@@ -22,8 +22,8 @@ This project does not have any dependencies, which makes building the
 executable much easier.
 
 ```bash
-git clone https://github.com/7sev7nsev7n7/ponytownskinextractor.git
-cd ponytownskinextractor
+git clone https://github.com/7sev7nsev7n7/ptskinextractor.git
+cd ptskinextractor
 make
 ```
 
