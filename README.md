@@ -1,7 +1,7 @@
 # Pony Town Skin Extractor
 
 This utility serves to extract information from Pony Town character files exported
-from the game, allowing easier sharing of skin details.
+from the game, allowing easier sharing of skin details
 
 This project is a work in progress and is not associated or affiliated with the
 Pony Town team
@@ -25,8 +25,9 @@ There is an example pony in `examples`:
 
 # Building
 
-This project does not have any dependencies, which makes building the
-executable much easier.
+Building this program relies on `gcc`, available by default on most Linux
+distributions. Make sure you have installed it along with the dependencies
+listed in their respective section to avoid any errors
 
 ```bash
 git clone https://github.com/7sev7nsev7n7/ptextractor.git
