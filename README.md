@@ -3,7 +3,8 @@
 This utility serves to extract information from Pony Town character files exported
 from the game, allowing easier sharing of skin details.
 
-This project is a work in progress
+This project is a work in progress and is not associated or affiliated with the
+Pony Town team
 
 # Usage
 
