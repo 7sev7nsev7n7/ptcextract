@@ -19,7 +19,7 @@ ptextract ~/downloads/character.ptc
 
 There is an example pony in `examples`:
 
-![](assets/pony.png)
+![example pony](assets/pony.png)
 
 # Building
 
