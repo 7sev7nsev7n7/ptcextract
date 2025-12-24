@@ -19,7 +19,7 @@ ptextract ~/downloads/character.ptc
 
 There is an example pony in `examples`:
 
-<img align="center" height="25%" src="assets/pony.png">
+<img align="middle" height="25%" src="assets/pony.png">
 
 # Building
 
