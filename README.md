@@ -19,7 +19,7 @@ ptextract ~/downloads/character.ptc
 
 There is an example pony in `examples`:
 
-![](assets/pony.png){heigth=25%}
+![](assets/pony.png)
 
 # Building
 
