@@ -7,15 +7,24 @@ This project is a work in progress
 
 # Usage
 
-(when they become available) download the latest release from the sidebar. run
-the executable from the command line specifying the directory where your
-character.ptc file is (note that this utility only works for single characters,
-full lists will be added in future versions).
-
-example:
+The program reads information from Pony Town character files (.ptc) and
+decompresses and prints out the character's details, making sharing characters
+much easier. To use the program, simply run it and specify the directory where
+your character file is located:
 
 ```bash
 ptextract ~/downloads/character.ptc
+```
+
+# Building
+
+This project does not have any dependencies, which makes building the
+executable much easier.
+
+```bash
+git clone https://github.com/7sev7nsev7n7/ponytownskinextractor.git
+cd ponytownskinextractor
+make
 ```
 
 ## Disclaimer
