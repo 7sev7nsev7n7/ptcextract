@@ -28,6 +28,16 @@ cd ptextractor
 make
 ```
 
+## Dependencies
+
+### Compile-time
+
+- libb64 
+
+### Runtime
+
+- libb64
+
 #### Disclaimer
 
 Compatibility on Windows operating systems might be buggy or non-functional.
