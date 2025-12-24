@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <b64/cdecode.h>
+
 #include "structs.h"
+#include "helpers.h"
+
 
 int main(int argc, char *argv[]) {
   // argument checking
@@ -21,6 +25,7 @@ int main(int argc, char *argv[]) {
   fclose(fptr);
 
   // main processing [TODO]
+  printf(decode(ponystring));
 
   return 0;
 }
