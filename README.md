@@ -30,13 +30,7 @@ make
 
 ## Dependencies
 
-### Compile-time
-
 - libb64 
-
-### Runtime
-
-- libb64
 
 #### Disclaimer
 
