@@ -27,7 +27,7 @@ cd ponytownskinextractor
 make
 ```
 
-## Disclaimer
+#### Disclaimer
 
 Compatibility on Windows operating systems might be buggy or non-functional.
 Please contact directly in case of any issues via Discord: 7sev7nsev7n7
