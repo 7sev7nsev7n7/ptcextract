@@ -6,8 +6,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "structs.h"
-#include "helpers.h"
+#include "libpony.h"
 
 void print_raw_decoded_string(char *decoded, int size) {
   // skipping version bits to only print name
