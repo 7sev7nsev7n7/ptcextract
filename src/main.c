@@ -11,21 +11,21 @@
 int main(int argc, char *argv[]) {
   // argument checking
   if (argc<2) {
-    printf("no files specified\n");
+    fprintf(stderr, "no files specified\n");
     exit(1);
   } 
 
   // opening file and reading contents
   int fd = open(argv[1], O_RDONLY);
   if (fd==-1) {
-    printf("file not found\n");
+    fprintf(stderr, "file not found\n");
     return 1;
   }
 
   // obtain filesize
   int filesize=fsize(fd);
   if (filesize<=0) {
-    printf("file is empty, quitting\n");
+    fprintf(stderr, "file is empty, quitting\n");
     return 1;
   }
 
