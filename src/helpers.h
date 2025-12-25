@@ -16,5 +16,6 @@ char* decode(char* input, int length) {
  * memory for the pony string */
 int fsize(int fd) { 
   struct stat st;
-  return (fstat(fd, &st)==0) ? st.st_size : -1;
+  fstat(fd, &st);
+  return ((st.st_mode & S_IFMT) == S_IFREG) ? st.st_size : -1;
 }
