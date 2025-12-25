@@ -25,9 +25,9 @@ There is an example pony in `examples`:
 
 # Building
 
-Building this program relies on `gcc`, available by default on most Linux
-distributions. Make sure you have installed it along with the dependencies
-listed in their respective section to avoid any errors
+Building this program relies on `gcc` and `make`, available by default on most
+Linux distributions. Make sure you have installed them along with the
+dependencies listed in their respective section to avoid any errors
 
 ```bash
 git clone https://github.com/7sev7nsev7n7/ptcextract.git
