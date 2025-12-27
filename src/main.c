@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
     // read file
     char* ponystring = malloc(filesize);
     read(file, ponystring, filesize);
-    // malloc() uint8_t array for decoding
+    // create uint8_t array for decoding
     uint8_t bas64_decoded[strlen(ponystring)];
     // base64 decode string
     int decoded_length=decode(ponystring, bas64_decoded);
