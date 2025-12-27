@@ -1,10 +1,10 @@
 # Pony Town Skin Extractor
 
-This utility serves to extract information from Pony Town character files exported
-from the game, allowing easier sharing of skin details.
-
-**This project is a work in progress and may not function as described here for
-the time being**. I am not associated or affiliated with the Pony Town team.
+This utility serves to extract information from Pony Town character files
+exported from the game, allowing easier sharing of skin details. It works by
+processing the raw data contained within the pony town character file and
+formatting it in a human-readable way, in order to allow easy sharing of
+character details and values such as colors and options.
 
 # Usage
 
@@ -47,3 +47,10 @@ make
 
 Compatibility on Windows operating systems might be buggy or non-functional.
 Please contact directly in case of any issues via Discord: 7sev7nsev7n7
+
+**This project is a work in progress and may not function as described here for
+the time being**. I am not associated or affiliated with the Pony Town team.
+
+This software is distributed as is and in good faith. I am not responsible for
+the unintended or irresponsible use of this tool, or any unintended side
+effects resulting from the usage of this tool.
