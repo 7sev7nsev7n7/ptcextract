@@ -2,14 +2,14 @@
  * these values define the size of each value in bits. These values were
  * obtained from Pony Town's source code, but might be different today as the
  * version obtained is old */
-#define VERSION_BITS 6 // max 63
-#define COLORS_LENGTH_BITS 10 // max 1023
-#define BOOLEAN_FIELDS_LENGTH_BITS 4 // max 15
-#define NUMBER_FIELDS_LENGTH_BITS 4 // max 15
-#define COLOR_FIELDS_LENGTH_BITS 4 // max 15
-#define SET_FIELDS_LENGTH_BITS 6 // max 63
-#define CM_LENGTH_BITS 5 // max 31
-#define NUMBERS_BITS 6 // max 63
+#define VERSION_BYTES 8 // first 8 bytes denoting version, max 255
+#define COLORS_LENGTH_BYTES 10 // max 1023
+#define BOOLEAN_FIELDS_LENGTH_BYTES 4 // max 15
+#define NUMBER_FIELDS_LENGTH_BYTES 4 // max 15
+#define COLOR_FIELDS_LENGTH_BYTES 4 // max 15
+#define SET_FIELDS_LENGTH_BYTES 6 // max 63
+#define CM_LENGTH_BYTES 5 // max 31
+#define NUMBERS_BYTES 6 // max 63
 
 /* linked list implementation that will allow storing multiple fields within
  * our struct */
@@ -23,6 +23,7 @@ struct linkedlist {
  * allocation wherever possible */
 struct pony {
   int version;
+  char* name;
   struct linkedlist colors; // ints converted to hex upon display
   struct linkedlist setFields; // will store char*s
   struct linkedlist colorFields; // will store 
@@ -31,19 +32,7 @@ struct pony {
   int cm; // color management? possibly unrequired
 };
 
-/* base64 decode entire pony string. this function relies on libb64 */
-char* decode(char* input, int length) {
-  char* output = malloc(length);
-  char* c=output;
-  int cnt=0;
-  base64_decodestate s;
-
-  base64_init_decodestate(&s);
-  cnt=base64_decode_block(input, strlen(input), c, &s);
-  c+=cnt;
-
-  return output;
-}
+/* ----------- END VALUE DEFINITIONS, BEGIN FUNCTION DEFINITIONS ----------- */
 
 /* determine filesize, from which we will allocate the appropriate space in
  * memory for the pony string */
@@ -53,8 +42,19 @@ int fsize(int fd) {
   return ((st.st_mode & S_IFMT) == S_IFREG) ? st.st_size : -1;
 }
 
-/* print full raw decoded base64 string */
-void print_raw_decoded_string(char *decoded, int size) {
-  // skipping version bits to only print name
-  for (int pos=0; pos<size; pos++) printf("%c", *(decoded+pos));
+/* base64 decode entire pony string and store as uint8_t array.
+ * this function relies on libb64 */
+void decode(const char* input, uint8_t* output) {
+  // initialize decodestate struct
+  base64_decodestate state;
+  base64_init_decodestate(&state);
+  // initialize control variables
+  uint8_t *c = output;
+  int count = 0;
+
+  // decode input base64 string and store in output buffer
+  count=base64_decode_block(input, strlen(input), output, &state);
+  c+=count;
+
+  *(output+strlen(input)-2)=EOF;
 }
