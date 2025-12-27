@@ -1,3 +1,5 @@
+#include "liblinkedlist.h"
+
 /* mapping sizes for different fields. each field can have multiple members,
  * these values define the size of each value in bits. These values were
  * obtained from Pony Town's source code, but might be different today as the
@@ -11,24 +13,17 @@
 #define CM_LENGTH_BYTES 5 // max 31
 #define NUMBERS_BYTES 6 // max 63
 
-/* linked list implementation that will allow storing multiple fields within
- * our struct */
-struct linkedlist {
-  void* value;
-  int next;
-};
-
 /* pony struct which will hold all pony's details and values. this struct can
  * be of variable size, so the implementation must also use dynamic memory
  * allocation wherever possible */
 struct pony {
   int version;
   char* name;
-  struct linkedlist colors; // ints converted to hex upon display
-  struct linkedlist setFields; // will store char*s
-  struct linkedlist colorFields; // will store 
-  struct linkedlist numberFields; // will store ints
-  struct linkedlist booleanFields; // will store boolean values
+  struct node colors; // ints converted to hex upon display
+  struct node setFields; // will store char*s
+  struct node colorFields; // will store 
+  struct node numberFields; // will store ints
+  struct node booleanFields; // will store boolean values
   int cm; // color management? possibly unrequired
 };
 
