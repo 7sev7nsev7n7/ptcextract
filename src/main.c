@@ -59,7 +59,6 @@ int main(int argc, char *argv[]) {
 
     // debug get name start position
     int name_end_position = namelen+9;
-    printf("colors start slightly after position %d\n", name_end_position);
 
     // debug print hex values before colors
     printf("first hex values before colors begin:\n",*(base64_decoded+name_end_position));
@@ -77,7 +76,6 @@ int main(int argc, char *argv[]) {
 
     // debug print color count, position and list colors
     printf("color count: %d\n", color_count/3);
-    printf("color start position: %d\n", color_start_position);
     printf("rest of colors as hex codes:\n");
     for (int i=0; i<color_count; i++) {
       if (i%3==0) printf("#");
