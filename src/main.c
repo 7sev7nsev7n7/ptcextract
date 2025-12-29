@@ -17,13 +17,13 @@ int main(int argc, char *argv[]) {
   } 
 
   // process every argument as an input file, this might change in the future
-  for (int i=1; i<argc; i++) {
+  for (int mainloop=1; mainloop<argc; mainloop++) {
     // print newline if we're processing more than one file
-    if(i>1) printf("\n");
-    printf("processing file %s\n", argv[i]);
+    if(mainloop>1) printf("\n");
+    printf("processing file %s\n", argv[mainloop]);
 
     // opening file and reading contents
-    int file = open(argv[i], O_RDONLY);
+    int file = open(argv[mainloop], O_RDONLY);
     if (file==-1) {
       fprintf(stderr, "file not found\n");
       return 1;
@@ -52,16 +52,45 @@ int main(int argc, char *argv[]) {
     // debug print character name
     // character name is always after the first nine bytes
     printf("character name: ");
-    for (int ii=9; ii<=(8+namelen); ii++) {
-      printf("%c", *(base64_decoded+ii));
+    for (int i=9; i<=(namelen+8); i++) {
+      printf("%c", *(base64_decoded+i));
     }
     printf("\n");
 
-    // debug print all values as hexadecimal
-    printf("rest of hex values:\n");
-    for (int ii=0; ii<decoded_length; ii++) {
-      printf("0x%.2x\n", *(base64_decoded+ii));
+    // debug get name start position
+    int name_end_position = namelen+9;
+    printf("colors start slightly after position %d\n", name_end_position);
+
+    // debug print hex values before colors
+    printf("first hex values before colors begin:\n",*(base64_decoded+name_end_position));
+    int color_start_position=0;
+    int color_count=0;
+    for (int i=name_end_position; i<decoded_length; i++) {
+      printf("0x%.2x\n", *(base64_decoded+i));
+      if (*(base64_decoded+i)==0x64) {
+        printf("0x%.2x (this indicates the color count)\n", *(base64_decoded+i+1));
+        color_start_position=i+1;
+        color_count=(int)*(base64_decoded+i+1)*3;
+        break;
+      }
     }
+
+    // debug print color count, position and list colors
+    printf("color count: %d\n", color_count/3);
+    printf("color start position: %d\n", color_start_position);
+    printf("rest of colors as hex codes:\n");
+    for (int i=0; i<color_count; i++) {
+      if (i%3==0) printf("#");
+      printf("%.2x", *(base64_decoded+color_start_position+i+1));
+      if (i%3==2) printf("\n");
+    }
+
+    // debug print rest of values as hex
+    printf("rest of values as uint8 hex values: \n");
+    for (int i=0; i<decoded_length-color_start_position; i++) {
+      printf("0x%.2x\n", *(base64_decoded+color_start_position+color_count+i+1));
+    }
+
     printf("\n");
   }
   return 0;
