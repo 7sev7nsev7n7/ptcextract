@@ -40,34 +40,41 @@ int main(int argc, char *argv[]) {
     char* ponystring = malloc(filesize);
     read(file, ponystring, filesize);
     // create uint8_t array for decoding
-    uint8_t bas64_decoded[strlen(ponystring)];
+    uint8_t base64_decoded[strlen(ponystring)];
     // base64 decode string
-    int decoded_length=decode(ponystring, bas64_decoded);
+    int decoded_length=decode(ponystring, base64_decoded);
     close(file); // close file as it is no longer required
 
     // debug print character count for pony name
-    int namelen = (int)*(bas64_decoded+8)-1;
+    int namelen = (int)*(base64_decoded+8)-1;
     printf("character name length: %d\n", namelen);
 
     // debug print character name
     // character name is always after the first nine bytes
     printf("character name: ");
     for (int ii=9; ii<=(8+namelen); ii++) {
-      printf("%c", *(bas64_decoded+ii));
+      printf("%c", *(base64_decoded+ii));
+    }
+    printf("\n");
+
+    // debug print all values as hexadecimal
+    printf("rest of hex values:\n");
+    for (int ii=0; ii<decoded_length; ii++) {
+      printf("0x%.2x\n", *(base64_decoded+ii));
     }
     printf("\n");
   }
   return 0;
 }
 
-// // debug print all bas64_decoded hex codes
+// // debug print all base64_decoded hex codes
 // for (int ii=1; ii<decoded_length; ii++) { // start on 1 to avoid modulus evaluating to zero before necessary
-//   printf("%.2x", *(bas64_decoded+ii-1));
+//   printf("%.2x", *(base64_decoded+ii-1));
 //   if (ii%2==0) printf(" ");
 //   if (ii%16==0) printf("\n");
 // }
 // printf("\n");
 // // debug print all hex values as characters
-// for (int ii=0; ii<decoded_length; ii++) printf("%c", *(bas64_decoded+ii));
+// for (int ii=0; ii<decoded_length; ii++) printf("%c", *(base64_decoded+ii));
 // printf("\n");
 
