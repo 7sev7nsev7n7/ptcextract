@@ -96,15 +96,3 @@ int main(int argc, char *argv[]) {
   }
   return 0;
 }
-
-// // debug print all base64_decoded hex codes
-// for (int ii=1; ii<decoded_length; ii++) { // start on 1 to avoid modulus evaluating to zero before necessary
-//   printf("%.2x", *(base64_decoded+ii-1));
-//   if (ii%2==0) printf(" ");
-//   if (ii%16==0) printf("\n");
-// }
-// printf("\n");
-// // debug print all hex values as characters
-// for (int ii=0; ii<decoded_length; ii++) printf("%c", *(base64_decoded+ii));
-// printf("\n");
-
