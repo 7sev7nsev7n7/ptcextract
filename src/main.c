@@ -45,6 +45,9 @@ int main(int argc, char *argv[]) {
     int decoded_length=decode(ponystring, base64_decoded);
     close(file); // close file as it is no longer required
 
+    /* ---------- BEGIN UGLY DEBUG CODE ---------- */
+    /* ---------- BEGIN UGLY DEBUG CODE ---------- */
+
     // debug print character count for pony name
     int namelen = (int)*(base64_decoded+8)-1;
     printf("character name length: %d\n", namelen);
