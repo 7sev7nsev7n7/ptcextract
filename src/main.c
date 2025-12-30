@@ -1,7 +1,7 @@
 #define PONY_VERSION "3ca61ba6041902" // pony version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 0
-#define VERSION_HOTFIX 4
+#define VERSION_HOTFIX 5
 
 #include <b64/cdecode.h>
 #include <fcntl.h>
