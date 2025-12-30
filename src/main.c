@@ -1,7 +1,7 @@
 #define PONY_VERSION "3ca61ba6041902" // pony version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 0
-#define VERSION_HOTFIX 2
+#define VERSION_HOTFIX 3
 
 #include <b64/cdecode.h>
 #include <fcntl.h>
@@ -15,7 +15,7 @@
 #include "lib/libpony.h"
 
 int main(int argc, char *argv[]) {
-  printf("ptcexctract v%d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_HOTFIX);
+  printf("ptcextract v%d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_HOTFIX);
   printf("based on pony version: %s\n\n", PONY_VERSION);
 
   // argument checking
@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
     // base64 decode string
     int decoded_length=decode(raw_string, base64_decoded);
     close(file); // close file as it is no longer required
+    free(raw_string); // free raw string as it is no longer required, and could eventually cause memory leak
 
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
