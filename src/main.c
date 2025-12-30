@@ -92,9 +92,8 @@ int main(int argc, char *argv[]) {
       for (int i=0; i<character_description_length; i++) {
         printf("%c", *(base64_decoded+name_end_position+remaining_byte_count+i+1));
       }
+      printf("\n\n");
     }
-    printf("\n");
-    printf("\n");
 
     // debug print hex values before colors
     int color_start_position=0;
