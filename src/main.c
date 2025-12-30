@@ -1,7 +1,7 @@
 #define PONY_VERSION "3ca61ba6041902" // pony version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 0
-#define VERSION_HOTFIX 3
+#define VERSION_HOTFIX 4
 
 #include <b64/cdecode.h>
 #include <fcntl.h>
@@ -15,8 +15,8 @@
 #include "lib/libpony.h"
 
 int main(int argc, char *argv[]) {
-  printf("ptcextract v%d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_HOTFIX);
-  printf("based on pony version: %s\n\n", PONY_VERSION);
+  printf("Extract .ptc character information (v%d.%d.%d).\n", VERSION_MAJOR, VERSION_MINOR, VERSION_HOTFIX);
+  printf("Based on pony version %s\n\n", PONY_VERSION);
 
   // argument checking
   if (argc<2) {
@@ -55,21 +55,21 @@ int main(int argc, char *argv[]) {
 
     // print newline if we're processing more than one file
     if(mainloop>1) printf("\n");
-    printf("-- processing file %s\n", argv[mainloop]);
+    printf("-- Processing file %s\n", argv[mainloop]);
 
     // debug print version
-    printf("-- pony version: ");
+    printf("-- Pony version: ");
     for (int i=0; i<7; i++)
       printf("%.2x", *(base64_decoded+i));
     printf("\n\n");
 
     // debug print character count for pony name
     int character_name_length = (int)*(base64_decoded+8)-1;
-    printf("-- character name length: %d\n", character_name_length);
+    printf("-- Character name length: %d\n", character_name_length);
 
     // debug print character name
     // character name is always after the first nine bytes
-    printf("-- character name: ");
+    printf("-- Character name: ");
     for (int i=9; i<=(character_name_length+8); i++) {
       printf("%c", *(base64_decoded+i));
     }
@@ -92,10 +92,10 @@ int main(int argc, char *argv[]) {
     // debug print character count for pony description
     int character_description_length = (int)*(base64_decoded+name_end_position+remaining_byte_count)-1;
     if (character_description_length>0) {
-      printf("-- character description length: %d\n", character_description_length);
+      printf("-- Character description length: %d\n", character_description_length);
 
       // debug print character description
-      printf("-- character description: ");
+      printf("-- Character description: ");
       for (int i=0; i<character_description_length; i++) {
         printf("%c", *(base64_decoded+name_end_position+remaining_byte_count+i+1));
       }
@@ -114,8 +114,8 @@ int main(int argc, char *argv[]) {
     }
 
     // debug print color count, position and list colors
-    printf("-- color count: %d (using %d bytes)\n", color_count/3, color_count);
-    printf("-- color hex codes:\n");
+    printf("-- Color count: %d (using %d bytes)\n", color_count/3, color_count);
+    printf("-- Color hex codes:\n");
     for (int i=0; i<color_count; i++) {
       if (i%3==0) printf("#");
       printf("%.2x", *(base64_decoded+color_start_position+i+1));
@@ -126,14 +126,14 @@ int main(int argc, char *argv[]) {
     // debug print rest of values as hex
     int rest_hex_start = color_start_position+color_count+1;
     int rest_hex_end=0;
-    printf("-- rest of values as uint8 hex values (starting at index %d or 0x%.2x): \n", rest_hex_start, rest_hex_start);
+    printf("-- Printing rest of values as uint8 hex values (starting at index %d or 0x%.2x): \n", rest_hex_start, rest_hex_start);
     for (int i=1; i<decoded_length-rest_hex_start+1; i++) {
       rest_hex_end++;
       printf("%.2x", *(base64_decoded+i+rest_hex_start-1));
       if (i%2==0) printf(" ");
       if (i%16==0) printf("\n");
     }
-    printf("\n-- total count of rest of hex codes: %d\n",rest_hex_end);
+    printf("\n-- Total count of rest of hex codes: %d\n",rest_hex_end);
   }
   return 0;
 }
