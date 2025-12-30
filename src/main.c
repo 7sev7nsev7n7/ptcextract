@@ -10,7 +10,8 @@
 #include "lib/libpony.h"
 
 int main(int argc, char *argv[]) {
-  printf("-- ptcextract made with pony version: 3ca61ba6041902\n");
+  printf("ptcextract made with pony version: 3ca61ba6041902\n\n");
+
   // argument checking
   if (argc<2) {
     fprintf(stderr, "no files specified\n");
@@ -53,9 +54,8 @@ int main(int argc, char *argv[]) {
     printf("-- pony version: ");
     for (int i=0; i<7; i++)
       printf("%.2x", *(base64_decoded+i));
-    printf("\n");
+    printf("\n\n");
 
-    printf("\n");
     // debug print character count for pony name
     int character_name_length = (int)*(base64_decoded+8)-1;
     printf("-- character name length: %d\n", character_name_length);
@@ -68,12 +68,12 @@ int main(int argc, char *argv[]) {
     }
     printf("\n");
 
-    printf("\n");
     // debug get byte count until end of file (or start of description if applicable)
     int remaining_byte_count = *(base64_decoded+character_name_length+9);
     if (remaining_byte_count>0x80) { // shitty necessary thing because of reasons
       remaining_byte_count = (*(base64_decoded+character_name_length+9)-0x80) + (*(base64_decoded+character_name_length+10)*0x80) + 1;
     }
+      printf("\n");
 
     // debug get name name position 
     //
@@ -92,29 +92,20 @@ int main(int argc, char *argv[]) {
       for (int i=0; i<character_description_length; i++) {
         printf("%c", *(base64_decoded+name_end_position+remaining_byte_count+i+1));
       }
-      printf("\n");
-      printf("\n");
     }
-
-    // debug print remaining byte count
-    printf("-- remaining byte count: %d\n", remaining_byte_count);
+    printf("\n");
+    printf("\n");
 
     // debug print hex values before colors
-    printf("-- first hex values before colors begin:\n",*(base64_decoded+name_end_position));
     int color_start_position=0;
     int color_count=0;
     for (int i=name_end_position; i<decoded_length; i++) {
       if (*(base64_decoded+i)==0x64) {
-        printf("0x%.2x (decimal 100 marker?)\n", *(base64_decoded+i));
-        printf("0x%.2x (this indicates the color count)\n", *(base64_decoded+i+1));
         color_start_position=i+1;
         color_count=(int)*(base64_decoded+i+1)*3;
         break;
       }
-      printf("0x%.2x (these values are the bytes left to read, excluding description)\n", *(base64_decoded+i), *(base64_decoded+i));
     }
-
-    printf("\n");
 
     // debug print color count, position and list colors
     printf("-- color count: %d (using %d bytes)\n", color_count/3, color_count);
