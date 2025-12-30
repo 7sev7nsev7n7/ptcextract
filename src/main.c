@@ -107,8 +107,6 @@ int main(int argc, char *argv[]) {
     for (int i=rest_hex_start; i<decoded_length; i++) {
       printf("0x%.2x\n", *(base64_decoded+i));
     }
-
-    printf("\n");
   }
   return 0;
 }
