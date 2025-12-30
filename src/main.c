@@ -46,10 +46,10 @@ int main(int argc, char *argv[]) {
 
     // print newline if we're processing more than one file
     if(mainloop>1) printf("\n");
-    printf("processing file %s\n", argv[mainloop]);
+    printf("-- processing file %s\n", argv[mainloop]);
 
     // debug print version
-    printf("pony version: ");
+    printf("-- pony version: ");
     for (int i=0; i<7; i++)
       printf("%.2x", *(base64_decoded+i));
     printf("\n");
@@ -58,11 +58,11 @@ int main(int argc, char *argv[]) {
 
     // debug print character count for pony name
     int character_name_length = (int)*(base64_decoded+8)-1;
-    printf("character name length: %d\n", character_name_length);
+    printf("-- character name length: %d\n", character_name_length);
 
     // debug print character name
     // character name is always after the first nine bytes
-    printf("character name: ");
+    printf("-- character name: ");
     for (int i=9; i<=(character_name_length+8); i++) {
       printf("%c", *(base64_decoded+i));
     }
@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
     printf("\n");
 
     // debug print hex values before colors
-    printf("first hex values before colors begin:\n",*(base64_decoded+name_end_position));
+    printf("-- first hex values before colors begin:\n",*(base64_decoded+name_end_position));
     int color_start_position=0;
     int color_count=0;
     for (int i=name_end_position; i<decoded_length; i++) {
@@ -91,8 +91,8 @@ int main(int argc, char *argv[]) {
     printf("\n");
 
     // debug print color count, position and list colors
-    printf("color count: %d\n", color_count/3);
-    printf("rest of colors as hex codes:\n");
+    printf("-- color count: %d\n", color_count/3);
+    printf("-- rest of colors as hex codes:\n");
     for (int i=0; i<color_count; i++) {
       if (i%3==0) printf("#");
       printf("%.2x", *(base64_decoded+color_start_position+i+1));
@@ -103,10 +103,15 @@ int main(int argc, char *argv[]) {
 
     // debug print rest of values as hex
     int rest_hex_start = color_start_position+color_count+1;
-    printf("rest of values as uint8 hex values (starting at index %d or 0x%.2x): \n", rest_hex_start, rest_hex_start);
-    for (int i=rest_hex_start; i<decoded_length; i++) {
-      printf("0x%.2x\n", *(base64_decoded+i));
+    int rest_hex_end=0;
+    printf("-- rest of values as uint8 hex values (starting at index %d or 0x%.2x): \n", rest_hex_start, rest_hex_start);
+    for (int i=1; i<decoded_length-rest_hex_start+1; i++) {
+      rest_hex_end++;
+      printf("%.2x", *(base64_decoded+i+rest_hex_start-1));
+      if (i%2==0) printf(" ");
+      if (i%16==0) printf("\n");
     }
+    printf("\n-- total count of rest of hex codes: %d\n",rest_hex_end);
   }
   return 0;
 }
