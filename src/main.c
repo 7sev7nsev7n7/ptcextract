@@ -87,8 +87,9 @@ int main(int argc, char *argv[]) {
     }
 
     // debug print rest of values as hex
-    printf("rest of values as uint8 hex values: \n");
-    for (int i=color_start_position+color_count+1; i<decoded_length; i++) {
+    int rest_hex_start = color_start_position+color_count+1;
+    printf("rest of values as uint8 hex values (starting at index %d or 0x%.2x): \n", rest_hex_start, rest_hex_start);
+    for (int i=rest_hex_start; i<decoded_length; i++) {
       printf("0x%.2x\n", *(base64_decoded+i));
     }
 
