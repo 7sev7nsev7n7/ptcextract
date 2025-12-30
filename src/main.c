@@ -1,7 +1,7 @@
 #define PONY_VERSION "3ca61ba6041902" // pony version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 0
-#define VERSION_HOTFIX 1
+#define VERSION_HOTFIX 2
 
 #include <b64/cdecode.h>
 #include <fcntl.h>
@@ -16,7 +16,7 @@
 
 int main(int argc, char *argv[]) {
   printf("ptcexctract v%d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_HOTFIX);
-  printf("made with pony version: %s\n\n", PONY_VERSION);
+  printf("based on pony version: %s\n\n", PONY_VERSION);
 
   // argument checking
   if (argc<2) {
