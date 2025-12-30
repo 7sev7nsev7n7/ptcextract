@@ -18,10 +18,6 @@ int main(int argc, char *argv[]) {
 
   // process every argument as an input file, this might change in the future
   for (int mainloop=1; mainloop<argc; mainloop++) {
-    // print newline if we're processing more than one file
-    if(mainloop>1) printf("\n");
-    printf("processing file %s\n", argv[mainloop]);
-
     // opening file and reading contents
     int file = open(argv[mainloop], O_RDONLY);
     if (file==-1) {
@@ -37,16 +33,20 @@ int main(int argc, char *argv[]) {
     }
 
     // read file
-    char* ponystring = malloc(filesize);
-    read(file, ponystring, filesize);
+    char* raw_string = malloc(filesize);
+    read(file, raw_string, filesize);
     // create uint8_t array for decoding
-    uint8_t base64_decoded[strlen(ponystring)];
+    uint8_t base64_decoded[strlen(raw_string)];
     // base64 decode string
-    int decoded_length=decode(ponystring, base64_decoded);
+    int decoded_length=decode(raw_string, base64_decoded);
     close(file); // close file as it is no longer required
 
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
+
+    // print newline if we're processing more than one file
+    if(mainloop>1) printf("\n");
+    printf("processing file %s\n", argv[mainloop]);
 
     // debug print version
     printf("pony version: ");
@@ -57,19 +57,19 @@ int main(int argc, char *argv[]) {
     printf("\n");
 
     // debug print character count for pony name
-    int namelen = (int)*(base64_decoded+8)-1;
-    printf("character name length: %d\n", namelen);
+    int character_name_length = (int)*(base64_decoded+8)-1;
+    printf("character name length: %d\n", character_name_length);
 
     // debug print character name
     // character name is always after the first nine bytes
     printf("character name: ");
-    for (int i=9; i<=(namelen+8); i++) {
+    for (int i=9; i<=(character_name_length+8); i++) {
       printf("%c", *(base64_decoded+i));
     }
     printf("\n");
 
     // debug get name start position
-    int name_end_position = namelen+9;
+    int name_end_position = character_name_length+9;
 
     printf("\n");
 
@@ -78,13 +78,14 @@ int main(int argc, char *argv[]) {
     int color_start_position=0;
     int color_count=0;
     for (int i=name_end_position; i<decoded_length; i++) {
-      printf("0x%.2x\n", *(base64_decoded+i));
       if (*(base64_decoded+i)==0x64) {
+        printf("0x%.2x (decimal 100 marker?)\n", *(base64_decoded+i));
         printf("0x%.2x (this indicates the color count)\n", *(base64_decoded+i+1));
         color_start_position=i+1;
         color_count=(int)*(base64_decoded+i+1)*3;
         break;
       }
+      printf("0x%.2x\n", *(base64_decoded+i));
     }
 
     printf("\n");
