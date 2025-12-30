@@ -48,6 +48,14 @@ int main(int argc, char *argv[]) {
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
 
+    // debug print version
+    printf("pony version: ");
+    for (int i=0; i<7; i++)
+      printf("%.2x", *(base64_decoded+i));
+    printf("\n");
+
+    printf("\n");
+
     // debug print character count for pony name
     int namelen = (int)*(base64_decoded+8)-1;
     printf("character name length: %d\n", namelen);
@@ -63,6 +71,8 @@ int main(int argc, char *argv[]) {
     // debug get name start position
     int name_end_position = namelen+9;
 
+    printf("\n");
+
     // debug print hex values before colors
     printf("first hex values before colors begin:\n",*(base64_decoded+name_end_position));
     int color_start_position=0;
@@ -77,6 +87,8 @@ int main(int argc, char *argv[]) {
       }
     }
 
+    printf("\n");
+
     // debug print color count, position and list colors
     printf("color count: %d\n", color_count/3);
     printf("rest of colors as hex codes:\n");
@@ -85,6 +97,8 @@ int main(int argc, char *argv[]) {
       printf("%.2x", *(base64_decoded+color_start_position+i+1));
       if (i%3==2) printf("\n");
     }
+
+    printf("\n");
 
     // debug print rest of values as hex
     int rest_hex_start = color_start_position+color_count+1;
