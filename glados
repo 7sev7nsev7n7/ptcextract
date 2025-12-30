@@ -1,0 +1,167 @@
+-- processing file /home/7sev7nsev7n7/downloads/glados.ptc
+-- pony version: 3ca61ba6041902
+
+-- character name length: 14
+-- character name: oh.. it's you.
+
+-- first hex values before colors begin:
+0xa7 (this value is tied to the charcter byte count, excluding description bytes. decimal value 167)
+0x05 (this value is tied to the charcter byte count, excluding description bytes. decimal value 5)
+0x64 (decimal 100 marker?)
+0x84 (this indicates the color count)
+
+-- color count: 132 (using 396 bytes)
+-- rest of colors as hex codes:
+#aeb8b9
+#ee9620
+#322202
+#361707
+#8d0000
+#26120a
+#351e0d
+#d1d1d1
+#c8cccc
+#b9bfc0
+#767e7f
+#cecaca
+#a5b3b7
+#5d6162
+#c0cbcb
+#c0c8c9
+#242220
+#d5951d
+#1b1812
+#221e16
+#946913
+#82541d
+#38290a
+#161512
+#371f0b
+#281607
+#272421
+#ddbf4d
+#1e1c1a
+#131210
+#3f2a12
+#422814
+#241b0a
+#070706
+#463309
+#322007
+#eeefef
+#e7eced
+#e4e6e6
+#899797
+#8f9b9d
+#eef6f7
+#ff0000
+#a9b3b3
+#98a0a0
+#c9cccc
+#cdd4d5
+#c5cecf
+#a1a6a7
+#6c7171
+#606768
+#c2c2c2
+#9da3a3
+#626262
+#474747
+#6d6f6f
+#6c7273
+#12100c
+#8b999a
+#b9c7c8
+#cad4d4
+#3f2f0e
+#4d5051
+#5b6566
+#ccd0d1
+#d9e2e2
+#161111
+#707677
+#140d01
+#281c03
+#100e09
+#1c1913
+#24221d
+#82640d
+#2a261f
+#1e1b15
+#290b0b
+#060503
+#0c0a06
+#201e19
+#7f6c1c
+#232019
+#1b1710
+#1b0b0b
+#191612
+#1c1a16
+#230909
+#1b1811
+#362206
+#191610
+#110f0a
+#170101
+#231707
+#13100c
+#110e0a
+#4b0404
+#201d18
+#241801
+#714b00
+#210000
+#0d0c09
+#0a0905
+#080604
+#1b150f
+#2b1e02
+#4c3504
+#7f6400
+#221f19
+#251106
+#e9f5f6
+#1e90ff
+#aab2b3
+#6f7272
+#758081
+#cbd6d7
+#b8bebe
+#c9cfcf
+#9aa5a5
+#4f5455
+#2b2822
+#23201a
+#1f1812
+#15120e
+#16110d
+#3c3833
+#342f23
+#352b24
+#372601
+#ffad00
+#210d0d
+#440d0d
+#9d0404
+
+-- rest of values as uint8 hex values (starting at index 423 or 0x1a7): 
+0044 8403 3fe2 f000 3400 e003 b000 0000 
+00c9 4020 0040 0000 0000 0060 6fd0 4004 
+0202 80c0 f160 8c01 0121 4164 181a 1d68 
+0000 f084 7800 0073 6224 0008 8909 8a0a 
+8b0b 8c0c 8d00 0363 83a3 c3e4 0424 4464 
+8104 0880 9498 0013 9414 c802 202a 2b00 
+0585 a5d1 0090 02f3 0313 2330 1a1a 9b1b 
+9c01 0819 401c 9d1d 9e1e 9f00 7e00 8082 
+8487 0600 0012 2408 2204 5464 5e40 0000 
+eb00 0980 11d2 1252 92d3 1340 2727 a828 
+a929 aa40 0260 0555 6575 8591 33a0 0b4b 
+6b8a 6bab cbe1 0009 8018 1856 8e8e 9898 
+c032 32b3 33b4 34b5 4002 6003 a6b6 c553 
+a6d3 afe0 418c 6006 e6f7 0717 2000 000e 
+6e8e aece e000 0200 6200 7474 f0f2 f407 
+b7c7 d7e7 f000 0408 43e1 7f02 6844 040f 
+7000 0820 0000 0828 3820 0828 3848 3820 
+0828 3820 0000 0820 0767 6c61 646f 73
+-- total count of rest of hex codes: 287

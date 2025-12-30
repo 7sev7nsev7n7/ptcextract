@@ -85,14 +85,14 @@ int main(int argc, char *argv[]) {
         color_count=(int)*(base64_decoded+i+1)*3;
         break;
       }
-      printf("0x%.2x (this value might be tied to the size/byte count\n", *(base64_decoded+i));
+      printf("0x%.2x (this value is tied to the charcter byte count, excluding description bytes. decimal value %d)\n", *(base64_decoded+i), *(base64_decoded+i));
     }
 
     printf("\n");
 
     // debug print color count, position and list colors
-    printf("-- color count: %d\n", color_count/3);
-    printf("-- rest of colors as hex codes:\n");
+    printf("-- color count: %d (using %d bytes)\n", color_count/3, color_count);
+    printf("-- color hex codes:\n");
     for (int i=0; i<color_count; i++) {
       if (i%3==0) printf("#");
       printf("%.2x", *(base64_decoded+color_start_position+i+1));
