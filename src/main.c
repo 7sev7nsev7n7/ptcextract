@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
         color_count=(int)*(base64_decoded+i+1)*3;
         break;
       }
-      printf("0x%.2x\n", *(base64_decoded+i));
+      printf("0x%.2x (this value might be tied to the size/byte count\n", *(base64_decoded+i));
     }
 
     printf("\n");
