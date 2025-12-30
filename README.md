@@ -2,15 +2,13 @@
 
 This utility serves to extract information from Pony Town character files
 exported from the game, allowing easier sharing of skin details. It works by
-processing the raw data contained within the pony town character file and
-formatting it in a human-readable way, in order to allow easy sharing of
-character details and values such as colors and options.
+processing the raw data contained within the file and formatting it in a
+human-readable way, in order to allow easy sharing of character details and
+values such as colors and options.
 
 # Usage
 
-The program reads information from Pony Town character files (.ptc) and
-decompresses and prints out the character's details, making sharing characters
-much easier. To use the program, simply run it and specify the directory where
+To use the program, simply run it and specify the directory where
 your character file is located:
 
 ```bash
