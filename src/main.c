@@ -1,7 +1,8 @@
 #define PONY_VERSION "3ca61ba6041902" // pony version upon which tool was based upon
+#define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 0
-#define VERSION_HOTFIX 5
+#define VERSION_HOTFIX 6
 
 #include <b64/cdecode.h>
 #include <fcntl.h>
@@ -15,8 +16,11 @@
 #include "lib/libpony.h"
 
 int main(int argc, char *argv[]) {
-  printf("Extract .ptc character information (v%d.%d.%d).\n", VERSION_MAJOR, VERSION_MINOR, VERSION_HOTFIX);
-  printf("Based on pony version %s\n\n", PONY_VERSION);
+  printf("Extract .ptc character information (v%d.%d.%d)\n", VERSION_MAJOR, VERSION_MINOR, VERSION_HOTFIX);
+  printf("Ptcextract is open software\n");
+  printf("For license details, please visit GitHub repository: https://github.com/7sev7nsev7n7/ptcextract\n");
+  printf("Based on pony version %s\n", PONY_VERSION);
+  printf("Based on Pony Town %s\n\n", PONY_TOWN_VERSION);
 
   // argument checking
   if (argc<2) {
@@ -55,7 +59,7 @@ int main(int argc, char *argv[]) {
 
     // print newline if we're processing more than one file
     if(mainloop>1) printf("\n");
-    printf("-- Processing file %s\n", argv[mainloop]);
+    printf("-- Processing file: %s\n", argv[mainloop]);
 
     // debug print version
     printf("-- Pony version: ");
