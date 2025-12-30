@@ -63,12 +63,9 @@ int main(int argc, char *argv[]) {
       printf("%.2x", *(base64_decoded+i));
     printf("\n\n");
 
-    // debug print character count for pony name
-    int character_name_length = (int)*(base64_decoded+8)-1;
-    printf("-- Character name length: %d\n", character_name_length);
-
     // debug print character name
     // character name is always after the first nine bytes
+    int character_name_length = (int)*(base64_decoded+8)-1;
     printf("-- Character name: ");
     for (int i=9; i<=(character_name_length+8); i++) {
       printf("%c", *(base64_decoded+i));
@@ -80,7 +77,6 @@ int main(int argc, char *argv[]) {
     if (remaining_byte_count>0x80) { // shitty necessary thing because of reasons
       remaining_byte_count = (*(base64_decoded+character_name_length+9)-0x80) + (*(base64_decoded+character_name_length+10)*0x80) + 1;
     }
-      printf("\n");
 
     // debug get name name position 
     //
@@ -89,12 +85,9 @@ int main(int argc, char *argv[]) {
     // applicable)
     int name_end_position = character_name_length+9;
 
-    // debug print character count for pony description
+    // debug print character description
     int character_description_length = (int)*(base64_decoded+name_end_position+remaining_byte_count)-1;
     if (character_description_length>0) {
-      printf("-- Character description length: %d\n", character_description_length);
-
-      // debug print character description
       printf("-- Character description: ");
       for (int i=0; i<character_description_length; i++) {
         printf("%c", *(base64_decoded+name_end_position+remaining_byte_count+i+1));
