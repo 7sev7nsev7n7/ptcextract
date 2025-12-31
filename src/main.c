@@ -2,7 +2,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 1
-#define VERSION_HOTFIX 2
+#define VERSION_HOTFIX 1
 
 #include <b64/cdecode.h>
 #include <fcntl.h>
