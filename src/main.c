@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
     // debug get color start position and count
     int color_start_position=0;
     int color_count=0;
-    for (int i=0; i<remaining_byte_count; i++) {
+    for (int i=(character_name_length+9); i<remaining_byte_count; i++) {
       if (*(base64_decoded+i)==0x64) {
         color_start_position=i+1;
         color_count=(int)*(base64_decoded+i+1)*3;
