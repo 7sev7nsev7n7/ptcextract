@@ -69,40 +69,34 @@ int main(int argc, char *argv[]) {
 
     // debug print character name
     // character name is always after the first nine bytes
-    int character_name_length = (int)*(base64_decoded+8)-1;
+    int character_name_length = (int)*(base64_decoded+8);
     printf("-- Character name: ");
-    for (int i=9; i<=(character_name_length+8); i++) {
-      printf("%c", *(base64_decoded+i));
+    for (int i=1; i<character_name_length; i++) {
+      printf("%c", *(base64_decoded+i+8));
     }
     printf("\n");
 
     // debug get byte count until end of file (or start of description if applicable)
-    int remaining_byte_count = *(base64_decoded+character_name_length+9);
+    int remaining_byte_count = *(base64_decoded+character_name_length+8);
     if (remaining_byte_count>0x80) { // shitty necessary thing because of reasons
-      remaining_byte_count = (*(base64_decoded+character_name_length+9)-0x80) + (*(base64_decoded+character_name_length+10)*0x80) + 1;
+      remaining_byte_count = (*(base64_decoded+character_name_length+8)-0x80) + (*(base64_decoded+character_name_length+9)*0x80) + 1;
     }
 
-    // debug get name name position 
-    //
-    // TODO remove and replace with superior byte count
-    // (this will allow us to skip the description bytes at the end, if
-    // applicable)
-    int name_end_position = character_name_length+9;
-
     // debug print character description
-    int character_description_length = (int)*(base64_decoded+name_end_position+remaining_byte_count)-1;
+    int character_description_length = decoded_length-(remaining_byte_count+character_name_length+9);
     if (character_description_length>0) {
       printf("-- Character description: ");
       for (int i=0; i<character_description_length; i++) {
-        printf("%c", *(base64_decoded+name_end_position+remaining_byte_count+i+1));
+        printf("%c", *(base64_decoded+character_name_length+remaining_byte_count+i+9));
       }
-      printf("\n\n");
+      printf("\n");
     }
+    printf("\n");
 
-    // debug print hex values before colors
+    // debug get color start position and count
     int color_start_position=0;
     int color_count=0;
-    for (int i=name_end_position; i<decoded_length; i++) {
+    for (int i=0; i<remaining_byte_count; i++) {
       if (*(base64_decoded+i)==0x64) {
         color_start_position=i+1;
         color_count=(int)*(base64_decoded+i+1)*3;
@@ -110,7 +104,7 @@ int main(int argc, char *argv[]) {
       }
     }
 
-    // debug print color count, position and list colors
+    // debug print color count and list colors
     printf("-- Color count: %d (using %d bytes)\n", color_count/3, color_count);
     printf("-- Color hex codes:\n");
     for (int i=0; i<color_count; i++) {
