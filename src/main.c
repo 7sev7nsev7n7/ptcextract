@@ -2,7 +2,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 1
-#define VERSION_HOTFIX 1
+#define VERSION_HOTFIX 2
 
 #include <b64/cdecode.h>
 #include <fcntl.h>
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
   // argument checking
   if (argc<2) {
     fprintf(stderr, "no files specified\n");
-    exit(1);
+    return 1;
   } 
 
   // process every argument as an input file, this might change in the future
