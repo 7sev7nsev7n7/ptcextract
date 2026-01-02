@@ -83,8 +83,7 @@ int main(int argc, char *argv[]) {
     }
 
     // debug print character description
-    int character_description_length = decoded_length-(remaining_byte_count+character_name_length+9);
-    if (character_description_length>0) {
+    if (int character_description_length = decoded_length-(remaining_byte_count+character_name_length+9); character_description_length>0) {
       printf("-- Character description: ");
       for (int i=0; i<character_description_length; i++) {
         printf("%c", *(base64_decoded+character_name_length+remaining_byte_count+i+9));
