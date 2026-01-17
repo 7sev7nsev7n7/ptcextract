@@ -1,9 +1,3 @@
-#define PONY_VERSION "3ca61ba6041902" // pony version upon which tool was based upon
-#define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
-#define VERSION_MAJOR 1
-#define VERSION_MINOR 1
-#define VERSION_HOTFIX 1
-
 #include <b64/cdecode.h>
 #include <fcntl.h>
 #include <stdint.h>
@@ -14,6 +8,12 @@
 #include <unistd.h>
 
 #include "lib/libpony.h"
+
+#define PONY_VERSION "3ca61ba6041902" // pony version upon which tool was based upon
+#define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
+#define VERSION_MAJOR 1
+#define VERSION_MINOR 1
+#define VERSION_HOTFIX 2
 
 int main(int argc, char *argv[]) {
   printf("Extract .ptc character information (v%d.%d.%d)\n", VERSION_MAJOR, VERSION_MINOR, VERSION_HOTFIX);
