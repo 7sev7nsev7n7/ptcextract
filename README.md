@@ -41,6 +41,12 @@ make
 
 - libb64 
 
+# TODO
+
+- Complete extraction of pattern/body part/accessory structure
+- Complete assignment of colors via color table to body parts
+- Complete full structured output with patterns, body parts and accessories, along with corresponding colors
+
 #### Disclaimer
 
 Compatibility on Windows operating systems might be buggy or non-functional.
