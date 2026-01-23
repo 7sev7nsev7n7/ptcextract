@@ -119,9 +119,8 @@ int main(int argc, char *argv[]) {
     printf("-- Printing rest of values as uint8 hex values (starting at index %d or 0x%.2x): \n", rest_hex_start, rest_hex_start);
     for (int i=1; i<decoded_length-rest_hex_start+1; i++) {
       rest_hex_end++;
-      printf("%.2x", *(base64_decoded+i+rest_hex_start-1));
-      if (i%2==0) printf(" ");
-      if (i%16==0) printf("\n");
+      printf("%.2x ", *(base64_decoded+i+rest_hex_start-1));
+      if (i%16==0 && i+1!=decoded_length-rest_hex_start+1) printf("\n");
     }
     printf("\n-- Total count of rest of hex codes: %d\n",rest_hex_end);
   }
