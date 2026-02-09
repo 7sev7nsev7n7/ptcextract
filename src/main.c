@@ -13,7 +13,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 3
-#define VERSION_HOTFIX 1
+#define VERSION_HOTFIX 2
 
 void print_title(); // print intro title with licensing and versioning info
 void print_usage(char*); // print tool usage with options
@@ -25,13 +25,17 @@ int main(int argc, char *argv[]) {
         return 1;
   }
 
-  int opt, notitle=0;
+  int opt;
+  int flags[] = { 0 }; // flags array, might switch to bitmap later but i'm lazy lol
+                       // flags, in order:
+                       // 0 - no title flag
+
   char filename[512]=""; // only supports one file at a time
 
   while ((opt = getopt(argc, argv, "qhf:i:")) != -1) {
     switch(opt) {
       case 'q': // quiet (no title)
-        notitle=1;
+        flags[0]=1;
         break;
       case 'i': // input file
         strcpy(filename, optarg);
@@ -46,7 +50,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  if (notitle==0) // print title if quiet flag not set
+  if (flags[0]==0) // print title if quiet flag not set
     print_title();
 
   // opening file and reading contents
