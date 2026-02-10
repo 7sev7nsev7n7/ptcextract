@@ -13,7 +13,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 3
-#define VERSION_HOTFIX 2
+#define VERSION_HOTFIX 3
 
 void print_title(); // print intro title with licensing and versioning info
 void print_usage(char*); // print tool usage with options
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 
   char filename[512]=""; // only supports one file at a time
 
-  while ((opt = getopt(argc, argv, "qhf:i:")) != -1) {
+  while ((opt = getopt(argc, argv, "f:hi:q")) != -1) {
     switch(opt) {
       case 'q': // quiet (no title)
         flags[0]=1;
