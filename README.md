@@ -11,7 +11,7 @@ values such as colors and options.
 To use the program, simply run it and specify the path to the file to process:
 
 ```bash
-ptcextract -i examples/horse.ptc
+./ptcextract -i examples/horse.ptc
 ```
 
 **Note**: Currently, reimplementation of processing multiple files is being
