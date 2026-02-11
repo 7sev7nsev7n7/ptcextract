@@ -13,7 +13,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 3
-#define VERSION_HOTFIX 3
+#define VERSION_HOTFIX 4
 
 void print_title(); // print intro title with licensing and versioning info
 void print_usage(char*); // print tool usage with options
@@ -25,11 +25,13 @@ int main(int argc, char *argv[]) {
         return 1;
   }
 
+  // flags array, might switch to bitmap later but i'm lazy lol flags, in
+  // order:
+  // 0 - no title flag
+  int flags[] = { 
+    0 
+  };
   int opt;
-  int flags[] = { 0 }; // flags array, might switch to bitmap later but i'm lazy lol
-                       // flags, in order:
-                       // 0 - no title flag
-
   char filename[512]=""; // only supports one file at a time
 
   while ((opt = getopt(argc, argv, "f:hi:q")) != -1) {
