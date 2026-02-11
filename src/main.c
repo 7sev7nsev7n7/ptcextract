@@ -13,7 +13,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 3
-#define VERSION_HOTFIX 4
+#define VERSION_HOTFIX 5
 
 void print_title(); // print intro title with licensing and versioning info
 void print_usage(char*); // print tool usage with options
@@ -165,7 +165,7 @@ void print_title() {
 }
 
 void print_usage(char* execpath) {
-  fprintf(stderr, "Usage: %s [-h] [[-f \"file\"] | [-i \"file\"]]\n\n", execpath);
+  fprintf(stderr, "Usage: %s [-q] [-h] [[-f \"file\"] | [-i \"file\"]]\n\n", execpath);
   fprintf(stderr, "ptcextract - extract .ptc character information\n\n");
   fprintf(stderr, "options:\n");
   fprintf(stderr, "  -h                 show this help message and exit\n");
