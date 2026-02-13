@@ -100,11 +100,8 @@ int main(int argc, char *argv[]) {
     // base64 decode string
     int decoded_length=decode(raw_string, base64_decoded);
 
-    // close file as it is no longer required
+    // close file and free raw string as they are no longer required
     close(file); 
-
-    // free raw string as it is no longer required, and could eventually cause
-    // memory leak
     free(raw_string); 
 
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
