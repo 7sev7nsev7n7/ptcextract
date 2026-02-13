@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 
   // check if no non-option arguments passed, and quit if so
   if(optind==argc) {
-    printf("no file supplied, aborting\n");
+    fprintf(stderr, "no files supplied, aborting\n");
     exit(1);
   }
 
