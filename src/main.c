@@ -111,10 +111,10 @@ int main(int argc, char *argv[]) {
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
 
     // print newline if we're processing more than one file
-    printf("-- Processing file: %s\n", argv[index]);
+    printf("Processing file: %s\n", argv[index]);
 
     // debug print version
-    printf("-- Pony version: ");
+    printf("Pony version: ");
     for (int i=0; i<7; i++)
       printf("%.2x", *(base64_decoded+i));
     printf("\n\n");
@@ -122,7 +122,7 @@ int main(int argc, char *argv[]) {
     // debug print character name
     // character name is always after the first nine bytes
     int character_name_length = (int)*(base64_decoded+8);
-    printf("-- Character name: ");
+    printf("Character name: ");
     for (int i=1; i<character_name_length; i++) {
       printf("%c", *(base64_decoded+i+8));
     }
@@ -136,7 +136,7 @@ int main(int argc, char *argv[]) {
 
     // debug print character description
     if (int character_description_length = decoded_length-(remaining_byte_count+character_name_length+9); character_description_length>0) {
-      printf("-- Character description: ");
+      printf("Character description: ");
       for (int i=0; i<character_description_length; i++) {
         printf("%c", *(base64_decoded+character_name_length+remaining_byte_count+i+9));
       }
@@ -156,8 +156,8 @@ int main(int argc, char *argv[]) {
     }
 
     // debug print color count and list colors
-    printf("-- Color count: %d (using %d bytes)\n", color_count/3, color_count);
-    printf("-- Color hex codes:\n");
+    printf("Color count: %d (using %d bytes)\n", color_count/3, color_count);
+    printf("Color hex codes:\n");
     for (int i=0; i<color_count; i++) {
       if (i%3==0) printf("   #");
       printf("%.2x", *(base64_decoded+color_start_position+i+1));
@@ -169,7 +169,7 @@ int main(int argc, char *argv[]) {
       printf("\n");
       int rest_hex_start = color_start_position+color_count+1;
       int rest_hex_end=0;
-      printf("-- Printing rest of values as uint8 hex values (starting at index %d or 0x%.2x): \n", rest_hex_start, rest_hex_start);
+      printf("Printing rest of values as uint8 hex values (starting at index %d or 0x%.2x): \n", rest_hex_start, rest_hex_start);
       for (int i=1; i<decoded_length-rest_hex_start+1; i++) {
         rest_hex_end++;
         printf("%.2x ", *(base64_decoded+i+rest_hex_start-1));
