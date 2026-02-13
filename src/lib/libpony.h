@@ -37,11 +37,14 @@ void print_usage(char* execpath) {
     { "-x", "print remaining hex values"},
   };
 
-  fprintf(stderr, "Usage: %s [-q] [-h] file(s)\n\n", execpath);
-  fprintf(stderr, "Ptcextract - extract .ptc character information\n\n");
-  fprintf(stderr, "options:\n");
+  fprintf(stderr, "Usage: %s ", execpath);
+  for (int i=0; i<sizeof(options)/sizeof(options[0]); i++)
+    fprintf(stderr, "[%s] ", options[i][0]);
+  fprintf(stderr, "file(s)\n");
 
-  for (int i=0; i<sizeof(options)/sizeof(options[0]); i++) {
+  fprintf(stderr, "Ptcextract - extract .ptc character information\n\n");
+
+  fprintf(stderr, "options:\n");
+  for (int i=0; i<sizeof(options)/sizeof(options[0]); i++)
     fprintf(stderr, "  %-*s\t%s\n", flaglength, options[i][0], options[i][1]);
-  }
 }
