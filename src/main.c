@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
   opterr=0;
   int opt;
 
-  while ((opt = getopt(argc, argv, "hqx")) != -1) {
+  while ((opt = getopt(argc, argv, "hqvx")) != -1) {
     switch(opt) {
       case 'q': // quiet (no title)
         flags[0]=false;
@@ -40,6 +40,9 @@ int main(int argc, char *argv[]) {
       case 'x':
         flags[1]=true;
         break;
+      case 'v':
+        print_version();
+        exit(0);
       case '?':
         fprintf(stderr, "unknown option '-%c', ignoring\n", optopt);
         break;
