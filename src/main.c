@@ -76,28 +76,32 @@ int main(int argc, char* argv[]) {
   // take action upon every non-option argument. this avoids having to create a
   // dedicated filename variable, array or whatever :)
   for (int index=optind; index<argc; index++) { 
+    // print filename to be processed, and newline if it is not the first file to be processed
+    if (index!=optind) printf("\n");
+    printf("Processing file: %s\n", argv[index]);
+
     // opening file and reading contents
     int fd;
     fd = open(argv[index], O_RDONLY);
     if (fd==-1) {
-      fprintf(stderr, "file access error, aborting (error %d)\n", errno);
-      exit(1);
+      fprintf(stderr, "file access error, skipping (error %d)\n", errno);
+      continue;
     }
 
     // stat file to get information such as type and size
     struct stat statbuf;
     if (fstat(fd, &statbuf)==-1) {
-      printf("stat error, aborting (error %d)\n", errno);
-      exit(1);
+      printf("stat error, skipping (error %d)\n", errno);
+      continue;
     }
 
     // check file type and size, to avoid processing invalid file types
     if (statbuf.st_size==0) {
-      fprintf(stderr, "file is empty, aborting\n");
-      exit(1);
+      fprintf(stderr, "file is empty, skipping\n");
+      continue;
     } else if (!S_ISREG(statbuf.st_mode)) {
-      fprintf(stderr, "not regular file, aborting\n");
-      exit(1);
+      fprintf(stderr, "not regular file, skipping\n");
+      continue;
     }
 
     // read file
@@ -116,9 +120,6 @@ int main(int argc, char* argv[]) {
 
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
-
-    // print newline if we're processing more than one file
-    printf("Processing file: %s\n", argv[index]);
 
     // debug print version
     printf("Pony version: ");
