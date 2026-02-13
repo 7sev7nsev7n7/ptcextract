@@ -1,4 +1,5 @@
 #include <b64/cdecode.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -13,7 +14,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 4
-#define VERSION_HOTFIX 5
+#define VERSION_HOTFIX 6
 
 void print_title(); // print intro title with licensing and versioning info
 void print_usage(char*); // print tool usage with options
@@ -69,20 +70,29 @@ int main(int argc, char *argv[]) {
     int file;
     file = open(argv[index], O_RDONLY);
     if (file==-1) {
-      fprintf(stderr, "file access error, aborting\n");
+      fprintf(stderr, "file access error, aborting (error %d)\n", errno);
       exit(1);
     }
 
-    // obtain filesize
-    int filesize=fsize(file);
-    if (filesize<=0) {
+    // stat file to get information such as type and size
+    struct stat statbuf;
+    if (stat(argv[index], &statbuf)==-1) {
+      printf("stat error, aborting (error %d)\n", errno);
+      exit(1);
+    }
+
+    // check file type and size, to avoid processing invalid file types
+    if (statbuf.st_size==0) {
       fprintf(stderr, "file is empty, aborting\n");
+      exit(1);
+    } else if (!S_ISREG(statbuf.st_mode)) {
+      fprintf(stderr, "not regular file, aborting\n");
       exit(1);
     }
 
     // read file
-    char* raw_string = malloc(filesize);
-    read(file, raw_string, filesize);
+    char* raw_string = malloc(statbuf.st_size);
+    read(file, raw_string, statbuf.st_size);
     // create uint8_t array for decoding
     uint8_t base64_decoded[strlen(raw_string)];
     // base64 decode string

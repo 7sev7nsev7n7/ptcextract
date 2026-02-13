@@ -29,14 +29,6 @@ struct pony {
 
 /* ----------- END VALUE DEFINITIONS, BEGIN FUNCTION DEFINITIONS ----------- */
 
-/* determine filesize, from which we will allocate the appropriate space in
- * memory for the pony string */
-int fsize(int fd) { 
-  struct stat st;
-  fstat(fd, &st);
-  return ((st.st_mode & S_IFMT) == S_IFREG) ? st.st_size : -1;
-}
-
 /* base64 decode entire pony string and store as uint8_t array.
  * this function relies on libb64 */
 int decode(const char* input, uint8_t* output) {
