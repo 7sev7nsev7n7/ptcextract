@@ -2,7 +2,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 2
 #define VERSION_MINOR 1
-#define VERSION_HOTFIX 9
+#define VERSION_HOTFIX 10
 
 #include <b64/cdecode.h>
 #include <errno.h>
@@ -15,6 +15,8 @@
 #include <unistd.h>
 
 #include "lib/libutils.h"
+
+int print_values_as_char(uint8_t array);
 
 int main(int argc, char* argv[]) {
   // argument handling
@@ -75,16 +77,16 @@ int main(int argc, char* argv[]) {
   // dedicated filename variable, array or whatever :)
   for (int index=optind; index<argc; index++) { 
     // opening file and reading contents
-    int file;
-    file = open(argv[index], O_RDONLY);
-    if (file==-1) {
+    int fd;
+    fd = open(argv[index], O_RDONLY);
+    if (fd==-1) {
       fprintf(stderr, "file access error, aborting (error %d)\n", errno);
       exit(1);
     }
 
     // stat file to get information such as type and size
     struct stat statbuf;
-    if (stat(argv[index], &statbuf)==-1) {
+    if (fstat(fd, &statbuf)==-1) {
       printf("stat error, aborting (error %d)\n", errno);
       exit(1);
     }
@@ -100,7 +102,7 @@ int main(int argc, char* argv[]) {
 
     // read file
     char* raw_string = malloc(statbuf.st_size);
-    read(file, raw_string, statbuf.st_size);
+    read(fd, raw_string, statbuf.st_size);
 
     // create uint8_t array for decoding
     uint8_t base64_decoded[statbuf.st_size];
@@ -109,7 +111,7 @@ int main(int argc, char* argv[]) {
     int decoded_length=decode(raw_string, base64_decoded);
 
     // close file and free raw string as they are no longer required
-    close(file); 
+    close(fd); 
     free(raw_string); 
 
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
