@@ -23,12 +23,14 @@ void print_title() {
 }
 
 void print_usage(char* execpath) {
-  int optionlength = 8;
+  int optionwidth = 8; // width of column where options will be printed. we
+                       // hard code this since we're too lazy to check for the
+                       // longest one and then add padding, etc.
   char *options[][2] = {
     { "-a", "process files as multi-character files" },
     { "-I", "print information title and exit" },
     { "-h", "print this help message and quit" },
-    { "-q", "skip printing welcome title" },
+    { "-q", "skip printing information title" },
     { "-x", "print remaining hex values" },
   };
 
@@ -41,5 +43,5 @@ void print_usage(char* execpath) {
 
   printf("options:\n");
   for (int i=0; i<sizeof(options)/sizeof(options[0]); i++)
-    printf("  %-*s\t%s\n", optionlength, options[i][0], options[i][1]);
+    printf("  %-*s\t%s\n", optionwidth, options[i][0], options[i][1]);
 }
