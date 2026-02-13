@@ -13,7 +13,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 4
-#define VERSION_HOTFIX 4
+#define VERSION_HOTFIX 5
 
 void print_title(); // print intro title with licensing and versioning info
 void print_usage(char*); // print tool usage with options
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
   };
 
   opterr=0;
-  int opt, index;
+  int opt;
 
   while ((opt = getopt(argc, argv, "hqx")) != -1) {
     switch(opt) {
@@ -46,36 +46,37 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "unknown option '-%c', ignoring\n", optopt);
         break;
       case 'h': // print usage and exit
-      default: // 
+      default:
         print_usage(argv[0]);
         exit(1);
     }
   }
 
-  if (flags[0]) // print title if quiet flag not set
+  // print title if quiet flag not set
+  if (flags[0])
     print_title();
 
   // check if no non-option arguments passed, and quit if so
   if(optind==argc) {
-    printf("no file supplied, exiting\n");
+    printf("no file supplied, aborting\n");
     exit(1);
   }
 
   // take action upon every non-option argument. this avoids having to create a
   // dedicated filename variable, array or whatever :)
-  for (index=optind; index<argc; index++) { 
+  for (int index=optind; index<argc; index++) { 
     // opening file and reading contents
     int file;
     file = open(argv[index], O_RDONLY);
     if (file==-1) {
-      fprintf(stderr, "file not found\n");
+      fprintf(stderr, "file access error, aborting");
       exit(1);
     }
 
     // obtain filesize
     int filesize=fsize(file);
     if (filesize<=0) {
-      fprintf(stderr, "file is empty, quitting\n");
+      fprintf(stderr, "file is empty, aborting\n");
       exit(1);
     }
 
@@ -87,7 +88,8 @@ int main(int argc, char *argv[]) {
     // base64 decode string
     int decoded_length=decode(raw_string, base64_decoded);
     close(file); // close file as it is no longer required
-    free(raw_string); // free raw string as it is no longer required, and could eventually cause memory leak
+    free(raw_string); // free raw string as it is no longer required, and could
+                      // eventually cause memory leak
 
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
