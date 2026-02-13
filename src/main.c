@@ -2,7 +2,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 2
 #define VERSION_MINOR 1
-#define VERSION_HOTFIX 8
+#define VERSION_HOTFIX 9
 
 #include <b64/cdecode.h>
 #include <errno.h>
@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
   // argument handling
   if (argc==1) { // print usage if no arguments are supplied
         print_usage(argv[0]);
-        exit(1);
+        exit(0);
   }
 
   // flags array, might switch to bitmap later but i'm lazy lol
@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
       case 'h': // print usage and exit
       default:
         print_usage(argv[0]);
-        exit(1);
+        exit(0);
       case '?': // unrecognized options
         fprintf(stderr, "unknown option '-%c', ignoring\n", optopt);
         break;
