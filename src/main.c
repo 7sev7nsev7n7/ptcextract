@@ -1,8 +1,8 @@
-#define PONY_VERSION "3ca61ba6041902" // pony version upon which tool was based upon
+#define PONY_VERSION "3CA61BA6041902" // pony version upon which tool was based upon
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 2
 #define VERSION_MINOR 1
-#define VERSION_HOTFIX 5
+#define VERSION_HOTFIX 6
 
 #include <b64/cdecode.h>
 #include <errno.h>
@@ -16,7 +16,7 @@
 
 #include "lib/libpony.h"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   // argument handling
   if (argc==1) { // print usage if no arguments are supplied
         print_usage(argv[0]);
@@ -30,12 +30,15 @@ int main(int argc, char *argv[]) {
   };
 
   opterr=0;
-  int opt;
 
-  while ((opt = getopt(argc, argv, ":ahqvx")) != -1) {
+  int opt;
+  while ((opt = getopt(argc, argv, ":ahiqx")) != -1) {
     switch(opt) {
-      case 'a': // all characters in file (pending implementation)
+      case 'a': // multi-character file processing (pending implementation)
         fprintf(stderr, "support for processing multi-character files is still pending, aborting\n");
+        exit(0);
+      case 'i': // print version and exit
+        print_title();
         exit(0);
       case 'q': // quiet (no title)
         flags[0]=false;
@@ -43,9 +46,6 @@ int main(int argc, char *argv[]) {
       case 'x': // print rest of hex values
         flags[1]=true;
         break;
-      case 'v': // print version and exit
-        print_version();
-        exit(0);
       case 'h': // print usage and exit
       default:
         print_usage(argv[0]);
@@ -66,8 +66,10 @@ int main(int argc, char *argv[]) {
   }
 
   // print title if quiet flag not set
-  if (flags[0])
+  if (flags[0]) {
     print_title();
+    printf("\n");
+  }
 
   // take action upon every non-option argument. this avoids having to create a
   // dedicated filename variable, array or whatever :)
@@ -119,7 +121,7 @@ int main(int argc, char *argv[]) {
     // debug print version
     printf("Pony version: ");
     for (int i=0; i<7; i++)
-      printf("%.2x", *(base64_decoded+i));
+      printf("%.2X", *(base64_decoded+i));
     printf("\n\n");
 
     // debug print character name
@@ -160,22 +162,22 @@ int main(int argc, char *argv[]) {
 
     // debug print color count and list colors
     printf("Color count: %d (using %d bytes)\n", color_count/3, color_count);
-    printf("Color hex codes:\n");
+    printf("Color values:\n");
     for (int i=0; i<color_count; i++) {
       if (i%3==0) printf("   #");
-      printf("%.2x", *(base64_decoded+color_start_position+i+1));
+      printf("%.2X", *(base64_decoded+color_start_position+i+1));
       if (i%3==2) printf("\n");
     }
 
-    // debug print rest of values as hex
+    // debug print rest of values as hex if flag is set
     if (flags[1]) {
       printf("\n");
       int rest_hex_start = color_start_position+color_count+1;
       int rest_hex_end=0;
-      printf("Printing rest of values as uint8 hex values (starting at index %d or 0x%.2x): \n", rest_hex_start, rest_hex_start);
+      printf("Printing rest of values as uint8 hex values (starting at index %d or 0x%.2X): \n", rest_hex_start, rest_hex_start);
       for (int i=1; i<decoded_length-rest_hex_start+1; i++) {
         rest_hex_end++;
-        printf("%.2x ", *(base64_decoded+i+rest_hex_start-1));
+        printf("%.2X ", *(base64_decoded+i+rest_hex_start-1));
         if (i%16==0 && i+1!=decoded_length-rest_hex_start+1) printf("\n");
       }
       printf("\n-- Total count of rest of hex codes: %d\n",rest_hex_end);

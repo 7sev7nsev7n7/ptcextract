@@ -17,13 +17,7 @@ int decode(const char* input, uint8_t* output) {
 
 void print_title() {
   printf("Extract .ptc character information (version %d.%d.%d)\n", VERSION_MAJOR, VERSION_MINOR, VERSION_HOTFIX);
-  printf("Ptcextract is open software. For license details, please visit GitHub repository: https://github.com/7sev7nsev7n7/ptcextract\n");
-  printf("Based on pony file version %s\n", PONY_VERSION);
-  printf("Based on Pony Town version %s\n\n", PONY_TOWN_VERSION);
-}
-
-void print_version() {
-  printf("Ptcextract version %d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_HOTFIX);
+  printf("Ptcextract is open software. For license details visit GitHub repository: https://github.com/7sev7nsev7n7/ptcextract\n");
   printf("Based on pony file version %s\n", PONY_VERSION);
   printf("Based on Pony Town version %s\n", PONY_TOWN_VERSION);
 }
@@ -32,20 +26,20 @@ void print_usage(char* execpath) {
   int optionlength = 8;
   char *options[][2] = {
     { "-a", "process files as multi-character files" },
-    { "-h", "show this help message and quit" },
+    { "-i", "print information title and exit" },
+    { "-h", "print this help message and quit" },
     { "-q", "skip printing welcome title" },
-    { "-v", "print ptcextract version info and quit"},
     { "-x", "print remaining hex values"},
   };
 
-  fprintf(stderr, "Usage: %s ", execpath);
+  printf("Usage: %s ", execpath);
   for (int i=0; i<sizeof(options)/sizeof(options[0]); i++)
-    fprintf(stderr, "[%s] ", options[i][0]);
-  fprintf(stderr, "file(s)\n\n");
+    printf("[%s] ", options[i][0]);
+  printf("file(s)\n\n");
 
-  fprintf(stderr, "Ptcextract - extract .ptc character information\n\n");
+  printf("Ptcextract - extract .ptc character information\n\n");
 
-  fprintf(stderr, "options:\n");
+  printf("options:\n");
   for (int i=0; i<sizeof(options)/sizeof(options[0]); i++)
-    fprintf(stderr, "  %-*s\t%s\n", optionlength, options[i][0], options[i][1]);
+    printf("  %-*s\t%s\n", optionlength, options[i][0], options[i][1]);
 }
