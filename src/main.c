@@ -32,23 +32,29 @@ int main(int argc, char *argv[]) {
   opterr=0;
   int opt;
 
-  while ((opt = getopt(argc, argv, "hqvx")) != -1) {
+  while ((opt = getopt(argc, argv, ":ahqvx")) != -1) {
     switch(opt) {
+      case 'a': // all characters in file (pending implementation)
+        fprintf(stderr, "support for processing multi-character files is still pending, aborting\n");
+        exit(0);
       case 'q': // quiet (no title)
         flags[0]=false;
         break;
-      case 'x':
+      case 'x': // print rest of hex values
         flags[1]=true;
         break;
-      case 'v':
+      case 'v': // print version and exit
         print_version();
         exit(0);
-      case '?':
-        fprintf(stderr, "unknown option '-%c', ignoring\n", optopt);
-        break;
       case 'h': // print usage and exit
       default:
         print_usage(argv[0]);
+        exit(1);
+      case '?': // unrecognized options
+        fprintf(stderr, "unknown option '-%c', ignoring\n", optopt);
+        break;
+      case ':':
+        fprintf(stderr, "missing argument for option '-%c', aborting\n", optopt);
         exit(1);
     }
   }

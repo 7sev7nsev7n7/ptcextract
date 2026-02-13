@@ -31,6 +31,7 @@ void print_version() {
 void print_usage(char* execpath) {
   int optionlength = 8;
   char *options[][2] = {
+    { "-a", "process files as multi-character files" },
     { "-h", "show this help message and quit" },
     { "-q", "skip printing welcome title" },
     { "-v", "print ptcextract version info and quit"},
