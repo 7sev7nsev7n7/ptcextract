@@ -52,15 +52,15 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  // print title if quiet flag not set
-  if (flags[0])
-    print_title();
-
   // check if no non-option arguments passed, and quit if so
   if(optind==argc) {
     printf("no file supplied, aborting\n");
     exit(1);
   }
+
+  // print title if quiet flag not set
+  if (flags[0])
+    print_title();
 
   // take action upon every non-option argument. this avoids having to create a
   // dedicated filename variable, array or whatever :)
@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
     int file;
     file = open(argv[index], O_RDONLY);
     if (file==-1) {
-      fprintf(stderr, "file access error, aborting");
+      fprintf(stderr, "file access error, aborting\n");
       exit(1);
     }
 
