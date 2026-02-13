@@ -14,7 +14,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "lib/libpony.h"
+#include "lib/libutils.h"
 
 int main(int argc, char* argv[]) {
   // argument handling
@@ -32,12 +32,12 @@ int main(int argc, char* argv[]) {
   opterr=0;
 
   int opt;
-  while ((opt = getopt(argc, argv, ":ahiqx")) != -1) {
+  while ((opt = getopt(argc, argv, ":ahIqx")) != -1) {
     switch(opt) {
       case 'a': // multi-character file processing (pending implementation)
         fprintf(stderr, "support for processing multi-character files is still pending, aborting\n");
         exit(0);
-      case 'i': // print version and exit
+      case 'I': // print version and exit
         print_title();
         exit(0);
       case 'q': // quiet (no title)

@@ -26,10 +26,10 @@ void print_usage(char* execpath) {
   int optionlength = 8;
   char *options[][2] = {
     { "-a", "process files as multi-character files" },
-    { "-i", "print information title and exit" },
+    { "-I", "print information title and exit" },
     { "-h", "print this help message and quit" },
     { "-q", "skip printing welcome title" },
-    { "-x", "print remaining hex values"},
+    { "-x", "print remaining hex values" },
   };
 
   printf("Usage: %s ", execpath);
