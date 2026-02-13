@@ -13,7 +13,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 4
-#define VERSION_HOTFIX 0
+#define VERSION_HOTFIX 1
 
 void print_title(); // print intro title with licensing and versioning info
 void print_usage(char*); // print tool usage with options
@@ -26,19 +26,21 @@ int main(int argc, char *argv[]) {
   }
 
   // flags array, might switch to bitmap later but i'm lazy lol flags, in
-  // order:
-  // 0 - no title flag
   bool flags[] = { 
-    true
+    true,  // print intro
+    false, // print rest of hex values
   };
 
   opterr=0;
   int opt, index;
 
-  while ((opt = getopt(argc, argv, "hq")) != -1) {
+  while ((opt = getopt(argc, argv, "hqx")) != -1) {
     switch(opt) {
       case 'q': // quiet (no title)
         flags[0]=false;
+        break;
+      case 'x':
+        flags[1]=true;
         break;
       case '?':
         fprintf(stderr, "unknown option '-%c', ignoring\n", optopt);
@@ -139,7 +141,7 @@ int main(int argc, char *argv[]) {
     }
 
     // debug print rest of values as hex
-    if (flags[0]) {
+    if (flags[1]) {
       printf("\n");
       int rest_hex_start = color_start_position+color_count+1;
       int rest_hex_end=0;
@@ -171,4 +173,5 @@ void print_usage(char* execpath) {
   fprintf(stderr, "  -i \"file\"          specify single character input file\n");
   fprintf(stderr, "  -f \"file\"          specify multiple character input file (pending proper implementation)\n");
   fprintf(stderr, "  -q                 do not print welcome title\n");
+  fprintf(stderr, "  -x                 print remaining hex values\n");
 }
