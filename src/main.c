@@ -13,7 +13,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 4
-#define VERSION_HOTFIX 2
+#define VERSION_HOTFIX 3
 
 void print_title(); // print intro title with licensing and versioning info
 void print_usage(char*); // print tool usage with options
@@ -54,6 +54,12 @@ int main(int argc, char *argv[]) {
 
   if (flags[0]) // print title if quiet flag not set
     print_title();
+
+  // check if no non-option arguments passed, and quit if so
+  if(optind==argc) {
+    printf("no file supplied, exiting\n");
+    exit(1);
+  }
 
   // take action upon every non-option argument. this avoids having to create a
   // dedicated filename variable, array or whatever :)
