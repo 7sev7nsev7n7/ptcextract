@@ -29,11 +29,19 @@ void print_version() {
 }
 
 void print_usage(char* execpath) {
+  int flaglength = 8;
+  char *options[][2] = {
+    { "-h", "show this help message and quit" },
+    { "-q", "skip printing welcome title" },
+    { "-v", "print ptcextract version info and quit"},
+    { "-x", "print remaining hex values"},
+  };
+
   fprintf(stderr, "Usage: %s [-q] [-h] file(s)\n\n", execpath);
   fprintf(stderr, "Ptcextract - extract .ptc character information\n\n");
   fprintf(stderr, "options:\n");
-  fprintf(stderr, "  -h                 show this help message and quit\n");
-  fprintf(stderr, "  -q                 skip printing welcome title\n");
-  fprintf(stderr, "  -v                 print ptcextract version info and quit\n");
-  fprintf(stderr, "  -x                 print remaining hex values\n");
+
+  for (int i=0; i<sizeof(options)/sizeof(options[0]); i++) {
+    fprintf(stderr, "  %-*s\t%s\n", flaglength, options[i][0], options[i][1]);
+  }
 }
