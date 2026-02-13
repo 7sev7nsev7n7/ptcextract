@@ -1,34 +1,3 @@
-#include "liblinkedlist.h"
-
-/* mapping sizes for different fields. each field can have multiple members,
- * these values define the size of each value in bits. These values were
- * obtained from Pony Town's source code, but might be different today as the
- * version obtained is old */
-#define VERSION_BYTES 8 // first 8 bytes denoting version, max 255
-#define COLORS_LENGTH_BYTES 10 // max 1023
-#define BOOLEAN_FIELDS_LENGTH_BYTES 4 // max 15
-#define NUMBER_FIELDS_LENGTH_BYTES 4 // max 15
-#define COLOR_FIELDS_LENGTH_BYTES 4 // max 15
-#define SET_FIELDS_LENGTH_BYTES 6 // max 63
-#define CM_LENGTH_BYTES 5 // max 31
-#define NUMBERS_BYTES 6 // max 63
-
-/* pony struct which will hold all pony's details and values. this struct can
- * be of variable size, so the implementation must also use dynamic memory
- * allocation wherever possible */
-struct pony {
-  int version;
-  char* name;
-  struct node colors; // ints converted to hex upon display
-  struct node setFields; // will store char*s
-  struct node colorFields; // will store 
-  struct node numberFields; // will store ints
-  struct node booleanFields; // will store boolean values
-  int cm; // color management? possibly unrequired
-};
-
-/* ----------- END VALUE DEFINITIONS, BEGIN FUNCTION DEFINITIONS ----------- */
-
 /* base64 decode entire pony string and store as uint8_t array.
  * this function relies on libb64 */
 int decode(const char* input, uint8_t* output) {

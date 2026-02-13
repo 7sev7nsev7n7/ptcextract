@@ -1,8 +1,8 @@
 #define PONY_VERSION "3ca61ba6041902" // pony version upon which tool was based upon
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
-#define VERSION_MINOR 4
-#define VERSION_HOTFIX 6
+#define VERSION_MINOR 5
+#define VERSION_HOTFIX 0
 
 #include <b64/cdecode.h>
 #include <errno.h>
