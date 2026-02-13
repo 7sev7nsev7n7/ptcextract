@@ -41,6 +41,7 @@ make
 - Complete extraction of pattern/body part/accessory structure
 - Complete assignment of colors via color table to body parts
 - Complete full structured output with patterns, body parts and accessories, along with corresponding colors
+- Complete processing of multi-character files (output of 'Export All')
 
 #### Disclaimer
 
