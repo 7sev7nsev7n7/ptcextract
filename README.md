@@ -8,15 +8,11 @@ values such as colors and options.
 
 # Usage
 
-To use the program, simply run it and specify the path to the file to process:
+To use the program, simply run it and specify the path to the file(s) to process:
 
 ```bash
 ./ptcextract examples/horse.ptc
 ```
-
-**Note**: Currently, reimplementation of processing multiple files is being
-worked on, due to code refactoring. For the time being, only one file can be
-processed at once.
 
 There is an example pony in `examples`:
 
