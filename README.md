@@ -20,6 +20,12 @@ There is an example pony in `examples`:
     <img height="25%" src="assets/horse.png">
 </p>
 
+You can also get more help by passing the `-h` flag to the program
+
+```bash
+./ptcextract -h
+```
+
 # Building
 
 Building this program relies on `gcc` and `make`, available by default on most
