@@ -40,7 +40,7 @@ void print_usage(char* execpath) {
   fprintf(stderr, "Usage: %s ", execpath);
   for (int i=0; i<sizeof(options)/sizeof(options[0]); i++)
     fprintf(stderr, "[%s] ", options[i][0]);
-  fprintf(stderr, "file(s)\n");
+  fprintf(stderr, "file(s)\n\n");
 
   fprintf(stderr, "Ptcextract - extract .ptc character information\n\n");
 
