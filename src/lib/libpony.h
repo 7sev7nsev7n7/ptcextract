@@ -29,7 +29,7 @@ void print_version() {
 }
 
 void print_usage(char* execpath) {
-  int flaglength = 8;
+  int optionlength = 8;
   char *options[][2] = {
     { "-h", "show this help message and quit" },
     { "-q", "skip printing welcome title" },
@@ -46,5 +46,5 @@ void print_usage(char* execpath) {
 
   fprintf(stderr, "options:\n");
   for (int i=0; i<sizeof(options)/sizeof(options[0]); i++)
-    fprintf(stderr, "  %-*s\t%s\n", flaglength, options[i][0], options[i][1]);
+    fprintf(stderr, "  %-*s\t%s\n", optionlength, options[i][0], options[i][1]);
 }
