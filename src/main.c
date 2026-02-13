@@ -2,7 +2,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 5
-#define VERSION_HOTFIX 0
+#define VERSION_HOTFIX 1
 
 #include <b64/cdecode.h>
 #include <errno.h>
@@ -90,13 +90,19 @@ int main(int argc, char *argv[]) {
     // read file
     char* raw_string = malloc(statbuf.st_size);
     read(file, raw_string, statbuf.st_size);
+
     // create uint8_t array for decoding
-    uint8_t base64_decoded[strlen(raw_string)];
+    uint8_t base64_decoded[statbuf.st_size];
+
     // base64 decode string
     int decoded_length=decode(raw_string, base64_decoded);
-    close(file); // close file as it is no longer required
-    free(raw_string); // free raw string as it is no longer required, and could
-                      // eventually cause memory leak
+
+    // close file as it is no longer required
+    close(file); 
+
+    // free raw string as it is no longer required, and could eventually cause
+    // memory leak
+    free(raw_string); 
 
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
