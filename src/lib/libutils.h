@@ -28,7 +28,7 @@ void print_usage(char* execpath) {
                        // longest one and then add padding, etc.
   char *options[][2] = {
     { "-a", "process files as multi-character files" },
-    { "-I", "print information title and exit" },
+    { "-I", "print information title and quit" },
     { "-h", "print this help message and quit" },
     { "-q", "skip printing information title" },
     { "-x", "print remaining hex values" },
