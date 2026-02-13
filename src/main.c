@@ -13,7 +13,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 4
-#define VERSION_HOTFIX 3
+#define VERSION_HOTFIX 4
 
 void print_title(); // print intro title with licensing and versioning info
 void print_usage(char*); // print tool usage with options
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         exit(1);
   }
 
-  // flags array, might switch to bitmap later but i'm lazy lol flags, in
+  // flags array, might switch to bitmap later but i'm lazy lol
   bool flags[] = { 
     true,  // print intro
     false, // print rest of hex values
