@@ -137,12 +137,19 @@ int main(int argc, char* argv[]) {
     printf("\n");
 
     // debug get byte count until end of file (or start of description if applicable)
+    //
+    // one (or two) bytes directly after name serve to tell how many bytes are
+    // used to store colors and options
     int remaining_byte_count = *(base64_decoded+character_name_length+8);
     if (remaining_byte_count>0x80) { // shitty necessary thing because of reasons
       remaining_byte_count = (*(base64_decoded+character_name_length+8)-0x80) + (*(base64_decoded+character_name_length+9)*0x80) + 1;
     }
 
     // debug print character description
+    //
+    // we utilize the value of the remaining byte count and compare it with the
+    // total byte count and print out any characters after the color and option
+    // structures
     if (int character_description_length = decoded_length-(remaining_byte_count+character_name_length+9); character_description_length>0) {
       printf("Character description: ");
       for (int i=0; i<character_description_length; i++) {
@@ -153,8 +160,7 @@ int main(int argc, char* argv[]) {
     printf("\n");
 
     // debug get color start position and count
-    int color_start_position=0;
-    int color_count=0;
+    int color_start_position=0, color_count=0;
     for (int i=(character_name_length+9); i<remaining_byte_count; i++) {
       if (*(base64_decoded+i)==0x64) {
         color_start_position=i+1;
