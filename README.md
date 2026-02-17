@@ -20,7 +20,7 @@ There is an example pony in `examples`:
     <img height="25%" src="assets/horse.png">
 </p>
 
-You can also get more help by passing the `-h` flag to the program
+You can also get more help by passing the `-h` option to the program
 
 ```bash
 ./ptcextract -h
