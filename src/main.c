@@ -173,7 +173,7 @@ int main(int argc, char* argv[]) {
     printf("Color count: %d (using %d bytes)\n", color_count/3, color_count);
     printf("Color values:\n");
     for (int i=0; i<color_count; i++) {
-      if (i%3==0) printf("   #");
+      if (i%3==0) printf("  #");
       printf("%.2X", *(base64_decoded+color_start_position+i+1));
       if (i%3==2) printf("\n");
     }
@@ -186,7 +186,7 @@ int main(int argc, char* argv[]) {
       printf("Printing rest of values as uint8 hex values (starting at index %d or 0x%.2X): \n", rest_hex_start, rest_hex_start);
       for (int i=1; i<decoded_length-rest_hex_start+1; i++) {
         rest_hex_end++;
-        printf("%.2X\n", *(base64_decoded+i+rest_hex_start-1));
+        printf("  0x%.2X\n", *(base64_decoded+i+rest_hex_start-1));
       }
       printf("\n-- Total count of rest of hex codes: %d\n",rest_hex_end);
     }
