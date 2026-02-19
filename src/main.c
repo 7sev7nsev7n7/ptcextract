@@ -2,7 +2,7 @@
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 2
 #define VERSION_MINOR 3
-#define VERSION_HOTFIX 0
+#define VERSION_HOTFIX 1
 
 #include <b64/cdecode.h>
 #include <errno.h>
@@ -190,7 +190,7 @@ int main(int argc, char* argv[]) {
       printf("Printing rest of values as uint8 hex values (starting at index %d or 0x%.2X): \n", rest_hex_start, rest_hex_start);
       for (int i=1; i<decoded_length-rest_hex_start+1; i++) {
         rest_hex_end++;
-        printf("  %d\t0x%.2X\n", i, *(base64_decoded+i+rest_hex_start-1));
+        printf("  %-4d0x%.2X\n", i, *(base64_decoded+i+rest_hex_start-1));
       }
       printf("\n-- Total count of rest of hex codes: %d\n",rest_hex_end);
     }
@@ -202,7 +202,7 @@ int main(int argc, char* argv[]) {
       printf("Printing rest of values as uint8 binary values (starting at index %d or 0x%.2X): \n", rest_hex_start, rest_hex_start);
       for (int i=1; i<decoded_length-rest_hex_start+1; i++) {
         rest_hex_end++;
-        printf("  %d\t0b %.8b\n", i, *(base64_decoded+i+rest_hex_start-1));
+        printf("  %-4d0b %.8b\n", i, *(base64_decoded+i+rest_hex_start-1));
       }
       printf("\n-- Total count of rest of hex codes: %d\n",rest_hex_end);
     }
