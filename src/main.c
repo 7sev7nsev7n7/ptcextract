@@ -1,8 +1,8 @@
 #define PONY_VERSION "3CA61BA6041902" // pony version upon which tool was based upon
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 2
-#define VERSION_MINOR 2
-#define VERSION_HOTFIX 1
+#define VERSION_MINOR 3
+#define VERSION_HOTFIX 0
 
 #include <b64/cdecode.h>
 #include <errno.h>
@@ -28,17 +28,21 @@ int main(int argc, char* argv[]) {
   // flags array, might switch to bitmap later but i'm lazy lol
   bool flags[] = { 
     true,  // print intro
-    false, // print rest of hex values
+    false, // print rest of values as hex
+    false, // print rest of values as binary
   };
 
   opterr=0;
 
   int opt;
-  while ((opt = getopt(argc, argv, ":ahIqx")) != -1) {
+  while ((opt = getopt(argc, argv, ":ahIqxb")) != -1) {
     switch(opt) {
       case 'a': // multi-character file processing (pending implementation)
         fprintf(stderr, "support for processing multi-character files is still pending, aborting\n");
         exit(0);
+      case 'b': // print rest of values as binary
+        flags[2]=true;
+        break;
       case 'I': // print version and exit
         print_title();
         exit(0);
@@ -186,7 +190,19 @@ int main(int argc, char* argv[]) {
       printf("Printing rest of values as uint8 hex values (starting at index %d or 0x%.2X): \n", rest_hex_start, rest_hex_start);
       for (int i=1; i<decoded_length-rest_hex_start+1; i++) {
         rest_hex_end++;
-        printf("  0x%.2X\n", *(base64_decoded+i+rest_hex_start-1));
+        printf("  %d\t0x%.2X\n", i, *(base64_decoded+i+rest_hex_start-1));
+      }
+      printf("\n-- Total count of rest of hex codes: %d\n",rest_hex_end);
+    }
+
+    if (flags[2]) {
+      printf("\n");
+      int rest_hex_start = color_start_position+color_count+1;
+      int rest_hex_end=0;
+      printf("Printing rest of values as uint8 binary values (starting at index %d or 0x%.2X): \n", rest_hex_start, rest_hex_start);
+      for (int i=1; i<decoded_length-rest_hex_start+1; i++) {
+        rest_hex_end++;
+        printf("  %d\t0b %.8b\n", i, *(base64_decoded+i+rest_hex_start-1));
       }
       printf("\n-- Total count of rest of hex codes: %d\n",rest_hex_end);
     }

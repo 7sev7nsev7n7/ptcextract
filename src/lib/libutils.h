@@ -28,10 +28,11 @@ void print_usage(char* execpath) {
                        // longest one and then add padding, etc.
   char *options[][2] = {
     { "-a", "process files as multi-character files" },
-    { "-I", "print information title and quit" },
+    { "-b", "print remaining values as binary" },
     { "-h", "print this help message and quit" },
+    { "-I", "print information title and quit" },
     { "-q", "skip printing information title" },
-    { "-x", "print remaining hex values" },
+    { "-x", "print remaining values as binary" },
   };
 
   printf("Usage: %s ", execpath);
