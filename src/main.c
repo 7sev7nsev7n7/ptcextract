@@ -16,8 +16,6 @@
 
 #include "lib/libutils.h"
 
-int print_values_as_char(uint8_t array);
-
 int main(int argc, char* argv[]) {
   // argument handling
   if (argc==1) { // print usage if no arguments are supplied
