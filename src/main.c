@@ -1,4 +1,4 @@
-#define PONY_VERSION "3CA61BA6041902" // pony version upon which tool was based upon
+#define PONY_VERSION (int[]){ 0x3C, 0xA6, 0x1B, 0xA6, 0x04, 0x19, 0x02 } // pony version upon which tool was based upon
 #define PONY_TOWN_VERSION "v0.124.0" // pony town version upon which tool was based upon
 #define VERSION_MAJOR 2
 #define VERSION_MINOR 3
@@ -124,10 +124,32 @@ int main(int argc, char* argv[]) {
     /* ---------- BEGIN UGLY DEBUG CODE ---------- */
 
     // debug print version
+    int v[7], version_mismatch=0;
     printf("Pony version: ");
-    for (int i=0; i<7; i++)
-      printf("%.2X", *(base64_decoded+i));
-    printf("\n\n");
+
+    for (int i=0; i<7; i++) {
+      v[i] = *(base64_decoded+i);
+      if (v[i] != PONY_VERSION[i]) {
+        version_mismatch=1;
+      }
+      printf("%x", v[i]);
+    }
+    printf("\n");
+
+    if (version_mismatch==1) {
+        printf("\e[31mWARNING\e[0m: Pony file versions do not match, program may not function as intended\n");
+        printf("\t\e[33mBase version: \e[0m\t");
+        for (int i=0; i<7; i++) {
+          printf("%x", PONY_VERSION[i]);
+        }
+        printf("\n");
+        printf("\t\e[33mInput version: \e[0m\t");
+        for (int i=0; i<7; i++) {
+          printf("%x", v[i]);
+        }
+        printf("\n\n");
+    }
+
 
     // debug print character name
     // character name is always after the first nine bytes

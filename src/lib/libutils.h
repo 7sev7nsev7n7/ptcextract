@@ -18,7 +18,12 @@ int decode(const char* input, uint8_t* output) {
 void print_title() {
   printf("Extract .ptc character information (version %d.%d.%d)\n", VERSION_MAJOR, VERSION_MINOR, VERSION_HOTFIX);
   printf("Ptcextract is open software. For license details visit GitHub repository: https://github.com/7sev7nsev7n7/ptcextract\n");
-  printf("Based on pony file version %s\n", PONY_VERSION);
+
+  printf("Based on pony file version ");
+  for (int i=0; i<7; i++)
+    printf("%x", PONY_VERSION[i]);
+  printf("\n");
+
   printf("Based on Pony Town version %s\n", PONY_TOWN_VERSION);
 }
 
